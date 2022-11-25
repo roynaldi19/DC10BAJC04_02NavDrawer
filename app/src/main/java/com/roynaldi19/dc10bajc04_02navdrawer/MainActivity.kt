@@ -23,75 +23,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DC10BAJC04_02NavDrawerTheme {
+            DC10BAJC04_02NavDrawerTheme() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
                     MyNavDrawerApp()
-
                 }
             }
         }
-    }
-}
-
-@Composable
-fun MyNavDrawerApp() {
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    val context = LocalContext.current
-
-    Scaffold(
-        topBar = {
-            MyTopBar(
-                onMenuClick = {
-                    scope.launch {
-                        scaffoldState.drawerState.open()
-                    }
-
-                }
-            )
-        },
-        drawerContent = { Text(stringResource(R.string.hello_from_nav_drawer))
-        },
-        drawerGesturesEnabled =  scaffoldState.drawerState.isOpen
-    ){ paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(stringResource(R.string.hello_world))
-        }
-    }
-}
-
-@Composable
-fun MyTopBar(onMenuClick: () -> Unit) {
-    TopAppBar(
-        navigationIcon = {
-            IconButton(onClick = {
-                onMenuClick()
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = stringResource(R.string.menu)
-                )
-            }
-        },
-        title = {
-            Text(stringResource(R.string.app_name))
-        },
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    DC10BAJC04_02NavDrawerTheme {
-        MyNavDrawerApp()
     }
 }
